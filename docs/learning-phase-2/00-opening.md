@@ -2,6 +2,12 @@
 
 ## 0.1 Today's Goals
 
+Bubble is a no-code tool that allows you to build applications through intuitive visual operations. It’s a powerful tool for developing prototype or relatively simple applications quickly and cost-effectively.
+
+However, when it comes to meeting more complex requirements, the functions provided by Bubble alone become insufficient. In such cases, by writing code yourself and developing through programming languages, you can implement more advanced and detailed features.
+
+In this and the following two sessions, we will learn how to develop applications by writing programming code. In this first session, we’ll cover the fundamental concepts, tools, and basic syntax needed for web application development. In the upcoming sessions, we’ll move on to more advanced development topics.
+
 By the end of this workshop, you will:
 
 1. **Understand web applications** - Learn how websites and web apps work behind the scenes
@@ -19,7 +25,7 @@ By the end of this workshop, you will:
 | 10:45-11:15 | AI Agent Demo | See AI build an app in seconds |
 | 11:15-12:00 | Setup Part1 | Install tools and create accounts |
 | 12:00-13:00 | Lunch Break | Recharge! |
-| 13:00-14:00 | Setup Part1 | Install tools and create accounts |
+| 13:00-14:00 | Setup Part2 | Install remainning tools and create accounts |
 | 14:00-17:00 | Programming Basics | Learn and practice programming basics |
 | 17:00-18:30 | Team Development | Learn Git and collaboration |
 | 18:30-19:00 | Summary & Q&A | Review and next steps |
