@@ -445,13 +445,26 @@ const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
 }
 ```
 
-コンポーネントの先頭に状態を追加：
+`app/my-pets/new/page.tsx`の既存のuseState宣言の近く（`const [uploading, setUploading] = useState(false)`の下）に、以下の状態を追加：
 
 ```typescript
 const [identifying, setIdentifying] = useState(false)
 ```
 
-Breedフィールドの下に識別中の表示を追加：
+**追加場所の例：**
+```typescript
+export default function NewPetPage() {
+  const router = useRouter()
+  const [user, setUser] = useState<any>(null)
+  const [loading, setLoading] = useState(false)
+  const [uploading, setUploading] = useState(false)
+  const [identifying, setIdentifying] = useState(false) // ← ここに追加
+  const [formData, setFormData] = useState({
+    // ...
+  })
+```
+
+次に、Breedフィールドの下に識別中の表示を追加：
 
 ```typescript
 {identifying && (
