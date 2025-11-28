@@ -8,7 +8,7 @@
 
 ## 実装する機能
 
-1. **犬種/猫種自動識別** - 画像から品種を判定
+1. **品種自動識別** - 画像から品種を判定
 2. **ヘルスケアアドバイザー** - AIチャットボット
 3. **子供イメージ画像生成** - 2匹のペットから子供の画像を生成
 
@@ -20,7 +20,17 @@
 
 #### 概要
 
-Google Gemini APIは、Googleが提供する最新のマルチモーダルAIモデルです。テキスト、画像、動画など、さまざまな形式のデータを理解し、処理できます。
+Google Gemini APIは、Googleが提供する最新の**マルチモーダルAIモデル**です。
+
+> **マルチモーダルAIとは？**
+> 「モーダル（modal）」= データの種類・形式を意味します。マルチモーダルAIは、**複数の種類のデータ**（テキスト、画像、動画、音声など）を同時に理解できるAIです。
+>
+> - **従来のAI**: テキストだけ、または画像だけを処理
+> - **マルチモーダルAI**: 画像を見て「この画像について教えて」と質問すると答えられる
+>
+> 例：画像 + テキスト → 「この犬の品種は何ですか？」→ 「ゴールデンレトリバーです」
+
+Gemini APIは、テキスト、画像、動画など、さまざまな形式のデータを理解し、処理できます。
 
 #### 主な機能
 
@@ -50,19 +60,20 @@ Google Gemini APIには複数のモデルがありますが、本講義では**G
 
 **なぜ2.5 Flashを選ぶのか？**
 - ✅ 学習に最適な性能とコストバランス
-- ✅ 犬種/猫種識別に十分な精度
+- ✅ 品種識別に十分な精度
 - ✅ チャットボットに最適な応答速度
 - ✅ 無料枠が大きく、練習に最適
 
-##### Gemini 1.5 Pro（参考）
+##### Gemini 2.5 Pro（参考）
 
-**モデル名**: `gemini-1.5-pro`
+**モデル名**: `gemini-2.5-pro`
 
-- 🧠 **最高性能**: より複雑な推論タスクに対応
-- 📚 **超長文**: 最大200万トークン
+- 🧠 **最高性能**: より複雑な推論タスクに対応、思考プロセスを持つモデル
+- 📚 **超長文**: 最大100万トークン（200万トークン対応予定）
+- 🎓 **高精度**: 数学・科学ベンチマークで最高性能
 - 💰 **高コスト**: 無料枠が少ない（月2 RPM程度）
 
-**用途**: 複雑な医療診断や詳細な分析が必要な場合のみ使用
+**用途**: 複雑な医療診断や詳細な分析が必要な場合に使用。本講義の内容は2.5 Flashで十分です。
 
 #### 料金
 
@@ -71,7 +82,7 @@ Google Gemini APIには複数のモデルがありますが、本講義では**G
 
 #### 本講義での用途
 
-1. **犬種/猫種自動識別**: Gemini 2.5 Flashで画像を分析し、品種を判定
+1. **品種自動識別**: Gemini 2.5 Flashで画像を分析し、品種を判定（犬、猫、鳥、魚など）
 2. **ヘルスケアアドバイザー**: Gemini 2.5 Flashでペットの健康に関する質問に回答
 
 ---
@@ -92,7 +103,7 @@ Hugging Faceは、機械学習モデルの共有プラットフォームです�
 
 #### 利用可能な画像生成モデル
 
-Hugging Face Inference APIでは、複数の画像生成モデルが利用可能です。本講義では**Stable Diffusion XL Base 1.0**を推奨します。
+Hugging Face Inference APIでは、複数の画像生成モデルが利用可能です。本講義では**Stable Diffusion XL Base 1.0**を使用します。
 
 ##### Stable Diffusion XL Base 1.0（推奨）🏆
 
@@ -104,15 +115,14 @@ Hugging Face Inference APIでは、複数の画像生成モデルが利用可能
 - 🆓 **無料**: Inference APIで無料利用可能
 
 **本講義での採用理由**:
-- ✅ 旧版（2.1）より画質が大幅に向上
-- ✅ ペットの特徴をより正確に表現
+- ✅ ペットの特徴を正確に表現
 - ✅ 無料枠で利用可能
 
 ##### Stable Diffusion 2.1（代替オプション）
 
 **モデル名**: `stabilityai/stable-diffusion-2-1`
 
-- ⚡ **高速**: XLより処理が速い
+- ⚡ **高速**: Stable Diffusion XL Base 1.0より処理が速い
 - 💾 **軽量**: モデルサイズが小さい
 - 📐 **512x512**: 標準解像度
 
@@ -144,9 +154,7 @@ Hugging Face Inference APIでは、複数の画像生成モデルが利用可能
 - **専用エンドポイント**: 安定した性能
 
 #### 本講義での用途
-
 - **子供イメージ画像生成**: 2匹のペットの特徴を組み合わせた画像を生成
-- **推奨モデル**: `stabilityai/stable-diffusion-xl-base-1.0`（高品質かつ無料）
 
 ---
 
@@ -157,18 +165,17 @@ Hugging Face Inference APIでは、複数の画像生成モデルが利用可能
 #### 1. 学習に最適
 
 **Google Gemini API（Gemini 2.5 Flash）**
-- ✅ **日本語対応が優れている** - 日本語での質問・回答が自然
-- ✅ **無料枠が充実** - 学習用途なら十分な無料枠（月1,500リクエスト/日）
+- ✅ **無料枠が充実** - 1日あたり1,500リクエストまで無料（学習用途に十分）
 - ✅ **マルチモーダル** - 画像とテキストの両方を1つのAPIで処理可能
-- ✅ **シンプルなAPI** - 初心者でも理解しやすい設計
-- ✅ **最新モデル** - Gemini 2.5 Flashで最新のAI技術を体験できる
+- ✅ **シンプルなAPI** - 初心者でも理解しやすい
 - ✅ **高速応答** - リアルタイム処理に最適な速度
+- ✅ **日本語対応が優れている** - 日本語での質問・回答が自然
 
 **Hugging Face Inference API**
-- ✅ **完全無料** - 学習環境で課金の心配なし
+- ✅ **無料で利用可能** - 学習環境に最適（具体的な制限は非公開だが、1時間数百リクエスト程度）
 - ✅ **豊富なモデル** - 数万のモデルから選択可能
 - ✅ **コミュニティが活発** - 問題解決の情報が豊富
-- ✅ **オープンソース** - モデルの仕組みを学べる
+- ✅ **オープンソース** - 公開された情報からモデルの仕組みなども学ぶことができる
 
 #### 2. 実用性が高い
 
@@ -186,7 +193,7 @@ Hugging Face Inference APIでは、複数の画像生成モデルが利用可能
 
 ### 他の選択肢との比較
 
-#### OpenAI API（GPT-4、DALL-E）
+#### OpenAI API
 
 **メリット**:
 - 非常に高性能
@@ -207,23 +214,8 @@ Hugging Face Inference APIでは、複数の画像生成モデルが利用可能
 
 **デメリット**:
 - ❌ **無料枠が限定的**
-- ❌ **画像生成機能がない**
-- ❌ **日本からの利用に制限がある場合も**
 
 ➡️ 今回の用途には不十分
-
-#### AWS Rekognition / Azure Computer Vision
-
-**メリット**:
-- 企業向けの信頼性
-- 豊富な機能
-
-**デメリット**:
-- ❌ **セットアップが複雑** - AWSアカウント、課金設定など
-- ❌ **学習曲線が急** - クラウドサービスの知識が必要
-- ❌ **無料枠に制限が多い**
-
-➡️ 初学者には複雑すぎる
 
 ### まとめ：今回の選定
 
@@ -235,17 +227,22 @@ Hugging Face Inference APIでは、複数の画像生成モデルが利用可能
 | ドキュメント | ⭐⭐⭐⭐ 充実 | ⭐⭐⭐⭐ 充実 |
 | 学習適性 | ⭐⭐⭐⭐⭐ 最適 | ⭐⭐⭐⭐⭐ 最適 |
 
-今回選定したAPIは、**学習目的、無料枠、使いやすさ、実用性のバランスが最も優れています**。
+今回選定したAPIは、**学習目的、無料枠、使いやすさ、実用性のバランスが優れています**。
 
 ---
 
+<br>
+
 **それでは、これらのAPIを使ってAI機能を実装していきましょう！まずは各APIのアクセスキーを取得します。**
+
+<br>
+
 
 ## 事前準備：APIキーの取得
 
 ### Google Gemini API キーの取得
 
-犬種識別とチャットボットで使用します。
+品種識別とチャットボットで使用します。
 
 1. Google AI Studio にアクセス：https://aistudio.google.com/
 
@@ -258,8 +255,6 @@ Hugging Face Inference APIでは、複数の画像生成モデルが利用可能
 5. 既存のGoogle Cloudプロジェクトを選択、または新規作成
 
 6. API キーが表示されるのでコピーして保存
-
-**無料枠**: 月60リクエスト/分まで無料
 
 ---
 
@@ -283,8 +278,6 @@ Hugging Face Inference APIでは、複数の画像生成モデルが利用可能
 
 7. トークンが表示されるのでコピーして保存
 
-**無料枠**: 完全無料（制限あり）
-
 ---
 
 ### 環境変数への追加
@@ -303,11 +296,11 @@ HUGGINGFACE_API_KEY=ここにHugging Face APIキーを貼り付け
 
 **準備が整いました！それでは、3つのAI機能を順番に実装していきましょう。**
 
-## 機能1: 犬種/猫種自動識別
+## 機能1: 品種自動識別
 
 ### 概要
 
-ペット登録時に画像をアップロードすると、AIが自動的に犬種や猫種を判定し、Breedフィールドに自動入力します。
+ペット登録時に画像をアップロードすると、AIが自動的に品種を判定し、Breedフィールドに自動入力します。犬や猫だけでなく、鳥や魚などすべてのペットカテゴリーに対応していますが、飼っている人の多い犬と猫が最も高精度です。
 
 ### 1-1. 必要なパッケージのインストール
 
@@ -417,7 +410,7 @@ const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData((prev) => ({ ...prev, imageUrl: uploadData.imageUrl }))
 
     // カテゴリーが選択されている場合、品種を自動識別
-    if (formData.category && (formData.category === 'Dog' || formData.category === 'Cat')) {
+    if (formData.category) {
       setIdentifying(true)
 
       const identifyFormData = new FormData()
@@ -445,13 +438,13 @@ const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
 }
 ```
 
-`app/my-pets/new/page.tsx`の既存のuseState宣言の近く（`const [uploading, setUploading] = useState(false)`の下）に、以下の状態を追加：
+`app/my-pets/new/page.tsx`に以下を追加。
 
 ```typescript
 const [identifying, setIdentifying] = useState(false)
 ```
 
-**追加場所の例：**
+**追加場所:**
 ```typescript
 export default function NewPetPage() {
   const router = useRouter()
@@ -464,7 +457,12 @@ export default function NewPetPage() {
   })
 ```
 
-次に、フォームの中でBreedフィールドの `</div>` の直後に、識別中の表示を追加します。
+同じく`app/my-pets/new/page.tsx`に以下を追加。
+```typescript
+{identifying && (
+  <p className="text-sm text-blue-600">AIが品種を識別中...</p>
+)}
+```
 
 **追加場所：**
 ```typescript
@@ -489,9 +487,11 @@ export default function NewPetPage() {
 
 ### 1-4. 動作確認
 
-1. ペット登録ページで「Category」を「Dog」または「Cat」に設定
+1. ペット登録ページで「Category」を選択（Dog、Cat、Bird、Fishなど）
 2. ペットの画像をアップロード
 3. 数秒後、「Breed」フィールドに自動的に品種名が入力される
+
+> **ヒント**: 犬や猫以外のペット（鳥、魚など）でも試してみましょう！AIがどの程度認識できるか確認できます。ただし、犬と猫が最も高精度です。
 
 ---
 
@@ -504,7 +504,6 @@ export default function NewPetPage() {
 1. **進捗の記録**: どこまで実装したか記録できる
 2. **バックアップ**: PCが故障してもGitHubにコードが残る
 3. **間違えても安全**: 前の状態に戻せる
-4. **実務の練習**: 実際の開発現場でも同じ流れ
 
 それでは、機能1の進捗を保存しましょう。
 
@@ -748,7 +747,7 @@ import { HealthChat } from "@/components/pets/health-chat" // ← ここに追�
 
 **② HealthChatコンポーネントの追加**
 
-return文の最後、`</div>`（containerの閉じタグ）の後に追加：
+return文の最後の`</div>`の上に追加：
 
 ```typescript
 return (
@@ -812,19 +811,22 @@ git push
 
 2匹のペットを選択して、その子供の姿をAIで生成します。
 
-**使用モデル**: Stable Diffusion XL Base 1.0
-- 高品質な1024x1024画像を生成
-- 2つのペットの特徴を組み合わせたプロンプトから画像を生成
+**特徴**:
+- 同じ種類のペット（犬×犬、猫×猫など）: 現実的な子供の姿を生成
+- **異なる種類のペット（犬×猫など）**: ファンタジーな「ハイブリッド生物」を生成 🦄
 
-**⚠️ 注意**: 初回実行時はモデルの読み込みに20-30秒かかる場合があります。2回目以降はキャッシュされて高速になります。
+> **キメラ（ハイブリッド）生成について**
+> このアプリでは、異なる種類のペットを選択すると、AIが想像力を働かせて両方の特徴を持つ架空の生物を生成します。AIの創造性を体験してみてください！
 
 ### 3-1. APIルートの作成
 
 `app/api/pets/generate-child/route.ts`を作成：
 
-この機能では、**2つのAIを組み合わせて**より良い結果を得ます：
+この機能では、**2つのAIを組み合わせて**より正確な子供のイメージ画像を生成します：
 1. **Gemini API**: 両親の画像から視覚的特徴を分析
 2. **Stable Diffusion XL**: 分析結果を元に子供の画像を生成
+
+さらに、両親のカテゴリーが異なる場合（犬×猫など）は、両方の特徴を持つハイブリッド生物として生成します。
 
 ```typescript
 import { NextRequest, NextResponse } from 'next/server'
@@ -851,8 +853,13 @@ export async function POST(request: NextRequest) {
       )
     }
 
+    // カテゴリーが同じかチェック
+    const sameCategory = parent1.category === parent2.category
+
     // Gemini APIで両親の画像から特徴を抽出
-    let prompt = `A cute baby ${parent1.category.toLowerCase()}`
+    let prompt = sameCategory
+      ? `A cute baby ${parent1.category.toLowerCase()}`
+      : `A creature that is a mix of a ${parent1.category.toLowerCase()} and a ${parent2.category.toLowerCase()}`
 
     // 両親に画像がある場合、Geminiで特徴を分析
     if (parent1.imageUrl && parent2.imageUrl) {
@@ -908,16 +915,33 @@ Child (mix): [2匹の特徴を組み合わせた子供の想像される見た�
         const childMatch = analysis.match(/Child.*?:(.*?)(?:\n|$)/i)
         if (childMatch) {
           const childDescription = childMatch[1].trim()
-          prompt = `A cute baby ${parent1.category.toLowerCase()}, ${childDescription}, adorable, fluffy, high quality, professional photo, cute face, detailed fur texture`
+          // 品種情報を追加
+          const breed1 = parent1.breed || parent1.category
+          const breed2 = parent2.breed || parent2.category
+          const breedInfo = `mix of ${breed1} and ${breed2}`
+
+          if (sameCategory) {
+            prompt = `A cute baby ${parent1.category.toLowerCase()} (${breedInfo}), ${childDescription}, adorable, fluffy, high quality, professional photo, cute face, detailed fur texture`
+          } else {
+            prompt = `A creature that is a mix of a ${parent1.category.toLowerCase()} and a ${parent2.category.toLowerCase()} (${breedInfo}), ${childDescription}, adorable, high quality, professional photo, detailed fur texture`
+          }
         }
       } catch (error) {
         console.error('Gemini analysis error:', error)
         // エラーの場合はフォールバック
-        prompt = `A cute baby ${parent1.category.toLowerCase()} that is a mix between a ${parent1.breed || parent1.category} and a ${parent2.breed || parent2.category}, adorable, fluffy, high quality, professional photo`
+        if (sameCategory) {
+          prompt = `A cute baby ${parent1.category.toLowerCase()} that is a mix between a ${parent1.breed || parent1.category} and a ${parent2.breed || parent2.category}, adorable, fluffy, high quality, professional photo`
+        } else {
+          prompt = `A creature that is a mix of a ${parent1.category.toLowerCase()} and a ${parent2.category.toLowerCase()}, combining features of a ${parent1.breed || parent1.category} and a ${parent2.breed || parent2.category}, adorable, high quality, professional photo`
+        }
       }
     } else {
       // 画像がない場合は品種名ベース
-      prompt = `A cute baby ${parent1.category.toLowerCase()} that is a mix between a ${parent1.breed || parent1.category} and a ${parent2.breed || parent2.category}, adorable, fluffy, high quality, professional photo`
+      if (sameCategory) {
+        prompt = `A cute baby ${parent1.category.toLowerCase()} that is a mix between a ${parent1.breed || parent1.category} and a ${parent2.breed || parent2.category}, adorable, fluffy, high quality, professional photo`
+      } else {
+        prompt = `A creature that is a mix of a ${parent1.category.toLowerCase()} and a ${parent2.category.toLowerCase()}, combining features of a ${parent1.breed || parent1.category} and a ${parent2.breed || parent2.category}, adorable, high quality, professional photo`
+      }
     }
 
     console.log('Final prompt:', prompt)
@@ -1172,7 +1196,7 @@ export default function GenerateChildPage() {
 }
 ```
 
-### 3-3. ナビゲーションへの追加
+### 3-3. ナビゲーションの追加
 
 `app/my-pets/page.tsx`を更新します。
 
@@ -1235,18 +1259,15 @@ import { Plus, Sparkles } from "lucide-react"
 
 1. ペット一覧ページで「子供を生成」ボタンをクリック
 2. 2匹のペットを選択
+   - **同じ種類**（犬×犬、猫×猫など）: 現実的な子供の姿
+   - **異なる種類**（犬×猫、猫×鳥など）: ファンタジーなハイブリッド生物 🦄
 3. 「子供の画像を生成」をクリック
 4. 数秒〜数十秒後、生成された画像が表示される
 
 **注意事項**:
 - **初回実行**: Stable Diffusion XLモデルの読み込みに20〜30秒かかります
 - **2回目以降**: モデルがキャッシュされるため、5〜10秒程度で生成されます
-- **画質**: 1024x1024の高解像度画像が生成されます（SD 2.1の512x512より高品質）
-- **タイムアウト**: 60秒以上かかる場合はエラーになります（稀）
-
-**トラブルシューティング**:
-- モデル読み込み中（503エラー）の場合: 20-30秒待ってから再試行
-- 画像が表示されない場合: ブラウザのコンソールでエラーを確認
+- **タイムアウト**: 稀ですが、60秒以上かかる場合はエラーになります
 
 ### 3-5. Gitでコミット・プッシュ
 
@@ -1276,22 +1297,23 @@ git push
 
 ### 実装した機能
 
-1. ✅ 犬種/猫種自動識別
+1. ✅ 品種自動識別
 2. ✅ ヘルスケアアドバイザーチャットボット
 3. ✅ 子供イメージ画像生成
 
 ### 使用したAPI
 
 - **Google Gemini API（Gemini 2.5 Flash）**: 画像認識、テキスト生成
-  - 犬種/猫種自動識別
+  - 品種自動識別
   - ヘルスケアチャットボット
+  - 子供画像生成時の両親の特徴抽出
 - **Hugging Face Inference API（Stable Diffusion XL Base 1.0）**: 画像生成
-  - 子供イメージ画像生成（1024x1024高解像度）
+  - 子供イメージ画像生成
 
 ### 学んだこと
 
-- AI APIの統合方法
-- 画像データの扱い方
+- AI APIの組み込み方法
+- 画像データの識別
 - チャットボットの実装
 - 画像生成AIの活用
 
@@ -1304,33 +1326,19 @@ git push
 ## 他に試せる無料AI API
 
 ここまでGoogle GeminiとHugging Face APIを使用してきましたが、**これらでは実現できない新しい機能**を追加できるAI APIを紹介します。
-
-### 🎯 なぜこれらのAPIなのか
-
-ここで紹介する3つのAPIは、Gemini/Hugging Faceと**機能が重複しない**ものだけに厳選しています：
-
-| 機能 | Gemini | Hugging Face | 紹介するAPI |
-|------|--------|--------------|-------------|
-| テキスト生成 | ✅ 高品質 | ✅ 利用可能 | ❌ 不要 |
-| 画像理解 | ✅ 高品質 | ✅ 利用可能 | ❌ 不要 |
-| 画像生成 | ❌ 未対応 | ✅ SDXL使用中 | ❌ 不要 |
-| **音声認識** | ❌ 未対応 | ⚠️ 難しい | ✅ **AssemblyAI** |
-| **音声生成** | ❌ 未対応 | ⚠️ 低品質 | ✅ **ElevenLabs** |
-| **動画生成・背景削除** | ❌ 未対応 | ⚠️ 複雑 | ✅ **Replicate** |
-
 自由演習の時間に、興味のあるAPIを試してみましょう。
 
 ---
 
-### 1. AssemblyAI ⭐ おすすめ
+### 1. AssemblyAI
 
 **提供元**: AssemblyAI
 **公式サイト**: https://www.assemblyai.com/
 
-#### 🎯 Gemini/HFとの違い
+#### Gemini/Hugging Faceとの違い
 - **Gemini**: 音声認識機能なし
 - **Hugging Face**: 音声認識モデルはあるが、精度とセットアップが難しい
-- **AssemblyAI**: 高精度 + 簡単 + 日本語対応
+- **AssemblyAI**: 音声認識が高精度 + 簡単 + 日本語対応
 
 #### できること
 - **音声認識**: 高精度な音声のテキスト化（音声 → テキスト）
@@ -1343,32 +1351,21 @@ git push
 - すべての機能が無料枠で利用可能
 - **メリット**: クレジットカード登録不要（メールアドレスのみ）
 
-#### ペットアプリでの活用例
-```typescript
-// ペットの観察記録を音声で入力
-「今日はポチが元気に走り回っていました」
-→ 自動でテキスト化してデータベースに保存
-```
-
-- 獣医との診察内容を録音して自動記録
-- ペットの観察日記を音声入力
-- 音声でチャットボットと会話（音声入力）
-
 #### 参考リンク
 - [AssemblyAI ドキュメント](https://www.assemblyai.com/docs)
 - [料金](https://www.assemblyai.com/pricing)
 
 ---
 
-### 2. ElevenLabs ⭐ おすすめ
+### 2. ElevenLabs
 
 **提供元**: ElevenLabs
 **公式サイト**: https://elevenlabs.io/
 
-#### 🎯 Gemini/HFとの違い
+#### Gemini/Hugging Faceとの違い
 - **Gemini**: 音声生成機能なし
 - **Hugging Face**: 音声生成モデルはあるが、品質が低く不自然
-- **ElevenLabs**: 非常に自然な人間らしい音声
+- **ElevenLabs**: 非常に自然な人間らしい音声で音声生成が可能
 
 #### できること
 - **自然な音声生成**: テキストから人間のような音声を生成（テキスト → 音声）
@@ -1381,18 +1378,6 @@ git push
 - 3つのカスタム音声まで作成可能
 - **メリット**: クレジットカード登録不要（メールアドレスのみ）
 
-#### ペットアプリでの活用例
-```typescript
-// チャットボットの回答を音声で読み上げ
-「ゴールデンレトリバーは毎日30分以上の運動が必要です」
-→ 自然な音声で再生
-```
-
-- 健康アドバイスを音声で読み上げ
-- ペットの情報を音声で案内
-- チャットボットの回答を音声化（音声出力）
-- 多言語でのペット情報提供
-
 #### 参考リンク
 - [ElevenLabs ドキュメント](https://elevenlabs.io/docs)
 - [料金](https://elevenlabs.io/pricing)
@@ -1404,7 +1389,7 @@ git push
 **提供元**: Replicate
 **公式サイト**: https://replicate.com/
 
-#### 🎯 Gemini/HFとの違い
+#### Gemini/Hugging Faceとの違い
 - **Gemini**: 動画生成、背景削除、高解像度化の機能なし
 - **Hugging Face**: これらのモデルはあるが、セットアップが複雑
 - **Replicate**: 簡単なAPI呼び出しで様々な高度なモデルを利用可能
@@ -1421,23 +1406,6 @@ git push
 - 従量課金制（モデルごとに料金が異なる）
 - **注意**: クレジットカード登録が必要
 
-#### ペットアプリでの活用例
-```typescript
-// 背景削除（RMBG-1.4モデル）
-ペット写真 → 背景が透明な画像
-
-// 高解像度化（Real-ESRGANモデル）
-古いペット写真 → 4倍の解像度に
-
-// 動画生成（AnimateDiffモデル）
-「柴犬が公園で走っている」 → 短い動画
-```
-
-- ペット写真の背景を自動削除
-- 古いペット写真を高解像度化
-- ペットのイラスト風画像生成
-- テキストからペットの動画を生成
-
 #### 参考リンク
 - [Replicate モデル一覧](https://replicate.com/explore)
 - [料金](https://replicate.com/pricing)
@@ -1446,11 +1414,11 @@ git push
 
 ### 📊 まとめ：各APIの特徴
 
-| API | 機能 | 無料枠 | クレカ | おすすめ度 |
-|-----|------|--------|--------|----------|
-| **AssemblyAI** | 音声 → テキスト | 月100時間 | 不要 | ⭐⭐⭐ |
-| **ElevenLabs** | テキスト → 音声 | 月10,000文字 | 不要 | ⭐⭐⭐ |
-| **Replicate** | 動画生成、背景削除など | 少額 | 必要 | ⭐⭐ |
+| API | 機能 | 無料枠 | クレカ |
+|-----|------|--------|--------|
+| **AssemblyAI** | 音声 → テキスト | 月100時間 | 不要 |
+| **ElevenLabs** | テキスト → 音声 | 月10,000文字 | 不要 |
+| **Replicate** | 動画生成、背景削除など | 少額 | 必要 |
 
 ---
 
@@ -1476,8 +1444,6 @@ git push
 自由にAI機能を追加してみましょう。
 ペット管理ではない新しいAIアプリを開発してもOKです。
 
-最後に何人かに発表してもらいます。
+最後に何人かに発表していただきます。
 
 ---
-
-**以上です！お疲れ様でした！**
